@@ -1,1 +1,53 @@
-# Write Kubernetes Deployment Script
+# Deployment definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Name of the deployment
+  name: book-catalog-deployment
+  labels:
+    # Label to identify the deployment
+    app: book-catalog
+spec:
+  # Number of replicas
+  replicas: 1
+  selector:
+    matchLabels:
+      # Pods with this label will be selected
+      app: book-catalog
+  template:
+    metadata:
+      labels:
+        # Label to identify the pod
+        app: book-catalog
+    spec:
+      containers:
+      # Container definition
+      - name: book-catalog-server
+        # Image to use
+        image: book-catalog-server:latest
+        # Image pull policy
+        imagePullPolicy: IfNotPresent 
+        ports:
+        # Port mapping
+        - containerPort: 8000
+        env:
+        # Environment variables
+        - name: DATABASE_URL
+          value: "********"
+---
+# Service definition
+apiVersion: v1
+kind: Service
+metadata:
+  # Name of the service
+  name: book-catalog-server-service
+spec:
+  selector:
+    # Pods with this label will be selected
+    app: book-catalog
+  ports:
+    # Port mapping
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer
