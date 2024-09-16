@@ -6,4 +6,4 @@ services:
     ports:
       - 8000:8000
     environment:
-      - DATABASE_URL=postgresql://db_722_postgresql_user:DVT3pwuQf4GfXzLRDLxWld3XSmjMi1aG@dpg-crdskm3v2p9s73cmk0vg-a.oregon-postgres.render.com/db_722_postgresql
+      - DATABASE_URL=__REMOVE__
