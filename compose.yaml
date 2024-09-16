@@ -6,4 +6,4 @@ services:
     ports:
       - 8000:8000
     environment:
-      - DATABASE_URL=__REMOVE__
+      - DATABASE_URL=__REMOVED__
